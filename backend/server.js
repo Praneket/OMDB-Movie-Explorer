@@ -9,19 +9,37 @@ const makeOmdbRouter = require("./routes/omdb");
 async function main() {
   const app = express();
 
-  app.use(helmet());
+app.use(
+  helmet({
+    crossOriginResourcePolicy: false,
+    crossOriginEmbedderPolicy: false,
+  })
+);
 
   // Correct CORS for local + Render deployment
-  app.use(
-    cors({
-      origin: [
-        "http://localhost:5173",              // local frontend
-        process.env.FRONTEND_URL || "*"       // Render frontend URL
-      ],
-      methods: ["GET"],
-      allowedHeaders: ["Content-Type"],
-    })
-  );
+  const allowedOrigins = [
+  "http://localhost:5173",
+  "http://localhost:5174",
+  process.env.FRONTEND_URL  // example: https://omdb-frontend-abc123.onrender.com
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      // Allow server-to-server or tools like Postman
+      if (!origin) return callback(null, true);
+
+      if (allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      } else {
+        console.log("❌ BLOCKED BY CORS:", origin);
+        return callback(new Error("CORS Not Allowed"));
+      }
+    },
+    methods: ["GET"],
+    allowedHeaders: ["Content-Type"],
+  })
+);
 
   app.use(express.json());
 
