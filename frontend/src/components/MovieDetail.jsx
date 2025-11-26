@@ -9,7 +9,7 @@ export default function MovieDetail({ imdbID, onClose }) {
     let cancelled = false;
 
     axios
-      .get(`http://localhost:4000/api/movie/${imdbID}`)
+      .get(`${import.meta.env.VITE_API_BASE}/api/movie/${imdbID}`)
       .then((r) => {
         if (!cancelled) setData(r.data.data);
       })

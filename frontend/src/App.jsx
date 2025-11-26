@@ -32,7 +32,7 @@ export default function App() {
 
       for (const id of favorites) {
         try {
-          const r = await axios.get(`http://localhost:4000/api/movie/${id}`);
+          const r = await axios.get(`${import.meta.env.VITE_API_BASE}/api/movie/${id}`);
           movieList.push(r.data.data);
         } catch (e) {
           console.error("Failed to load favorite:", id, e);
@@ -72,7 +72,7 @@ export default function App() {
       try {
         setLoading(true);
 
-        const r = await axios.get("http://localhost:4000/api/search", {
+        const r = await axios.get(`${import.meta.env.VITE_API_BASE}/api/search`, {
           params: { q: query },
           signal: controller.signal,
         });
