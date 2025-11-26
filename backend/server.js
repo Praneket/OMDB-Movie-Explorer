@@ -20,26 +20,31 @@ app.use(
   const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  process.env.FRONTEND_URL  // example: https://omdb-frontend-abc123.onrender.com
+  "https://omdb-movie-explorer-frontend.onrender.com",   // your exact frontend URL
 ];
 
 app.use(
   cors({
     origin: function (origin, callback) {
-      // Allow server-to-server or tools like Postman
+      console.log("🔍 Incoming Origin:", origin);
+
+      // Allow server-to-server, Postman, curl
       if (!origin) return callback(null, true);
 
       if (allowedOrigins.includes(origin)) {
+        console.log("✅ CORS Allowed:", origin);
         return callback(null, true);
       } else {
-        console.log("❌ BLOCKED BY CORS:", origin);
-        return callback(new Error("CORS Not Allowed"));
+        console.log("❌ CORS Blocked:", origin);
+        return callback(new Error("CORS Not Allowed"), false);
       }
     },
+    credentials: true,
     methods: ["GET"],
     allowedHeaders: ["Content-Type"],
   })
 );
+
 
   app.use(express.json());
 
