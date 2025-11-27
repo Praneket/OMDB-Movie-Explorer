@@ -83,6 +83,10 @@ OMDB-Movie-Explorer/
     └── package.json
 ```
 
+<img width="1359" height="590" alt="Screenshot 2025-11-27 081154" src="https://github.com/user-attachments/assets/ddea249f-6b1e-485c-8e4e-8380be19c881" />
+<img width="1365" height="599" alt="Screenshot 2025-11-27 081211" src="https://github.com/user-attachments/assets/afb09b3a-e27e-4edb-85d7-99c4b6adfc44" />
+<img width="1363" height="592" alt="Screenshot 2025-11-27 081232" src="https://github.com/user-attachments/assets/8630c6f3-8f82-44c1-9536-2c7d2b992cc4" />
+
 ---
 
 ## ❤️ Author
